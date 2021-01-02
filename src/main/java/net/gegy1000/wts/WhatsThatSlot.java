@@ -4,34 +4,59 @@ import net.gegy1000.wts.gui.SlotGUI;
 import net.gegy1000.wts.gui.provider.SlotGuiProvider;
 import net.gegy1000.wts.gui.provider.VanillaGuiProvider;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.inventory.GuiContainer;
+//import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
+//import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.inventory.Slot;
+//import net.minecraft.inventory.Slot;
+import net.minecraft.client.util.InputMappings;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemAir;
+//import net.minecraft.item.ItemAir;
+import net.minecraft.item.AirItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+//import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+//import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.lwjgl.input.Keyboard;
+
+import net.minecraftforge.server.command.ModIdArgument;
+import org.lwjgl.glfw.GLFW;
+import net.minecraft.client.settings.KeyBinding;
+
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-@Mod(modid = WhatsThatSlot.MODID, name = "What's That Slot", version = WhatsThatSlot.VERSION, clientSideOnly = true)
+@Mod(WhatsThatSlot.MODID)
 public class WhatsThatSlot {
-    public static final String MODID = "wts";
-    public static final String VERSION = "1.1.0";
 
-    public static final KeyBinding KEY_CHECK_SLOT = new KeyBinding("Check Slot", Keyboard.KEY_P, "What's That Slot");
+    public static final String MODID = "tts";
+
+    public static final KeyBinding checkSlot;
+
+    static InputMappings.Input getKey(int key) {
+        return InputMappings.Type.KEYSYM.getOrMakeInput(key);
+    }
+
+    static {
+        checkSlot = new KeyBinding("key.tts.checkSlot", KeyConflictContext.GUI, getKey(GLFW.GLFW_KEY_P), MODID);
+    }
+
+    public static void init() {
+        ClientRegistry.registerKeyBinding(checkSlot);
+    }
 
     public static final List<ItemStack> ITEMS = new LinkedList<>();
 
@@ -41,14 +66,14 @@ public class WhatsThatSlot {
     private SlotGUI slotGUI;
 
     @Mod.EventHandler
-    public void onPreInit(FMLPreInitializationEvent event) {
+    public void onPreInit(FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     @Mod.EventHandler
-    public void onPostInit(FMLPostInitializationEvent event) {
+    public void onPostInit(FMLClientSetupEvent event) {
         for (Item item : Item.REGISTRY) {
-            if (item instanceof ItemAir) {
+            if (item instanceof AirItem) {
                 continue;
             }
             NonNullList<ItemStack> stacks = NonNullList.create();
@@ -68,7 +93,7 @@ public class WhatsThatSlot {
 
     @SubscribeEvent
     public void onKeyPress(GuiScreenEvent.KeyboardInputEvent event) {
-        GuiScreen currentScreen = Minecraft.getMinecraft().currentScreen;
+        Screen currentScreen = Minecraft.getInstance().currentScreen;
         if (Keyboard.isKeyDown(KEY_CHECK_SLOT.getKeyCode()) && currentScreen instanceof GuiContainer) {
             GuiContainer container = (GuiContainer) currentScreen;
             Slot selectedSlot = container.getSlotUnderMouse();
