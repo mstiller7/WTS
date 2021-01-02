@@ -1,7 +1,7 @@
-package net.gegy1000.wts.gui.provider;
+package com.erunseelie.tts.gui.provider;
 
-import net.gegy1000.wts.gui.SlotGUI;
-import net.gegy1000.wts.gui.VanillaSlotGUI;
+import com.erunseelie.tts.gui.SlotGUI;
+import com.erunseelie.tts.gui.VanillaSlotGUI;
 
 public class VanillaGuiProvider implements SlotGuiProvider {
     private VanillaSlotGUI gui = new VanillaSlotGUI();

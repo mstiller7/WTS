@@ -1,7 +1,7 @@
-package net.gegy1000.wts.gui;
+package com.erunseelie.tts.gui;
 
+import com.erunseelie.tts.SlotPlaceInfo;
 import mezz.jei.api.IJeiRuntime;
-import net.gegy1000.wts.SlotPlaceInfo;
 
 import java.util.Collections;
 

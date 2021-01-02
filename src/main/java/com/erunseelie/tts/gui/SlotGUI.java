@@ -1,6 +1,6 @@
-package net.gegy1000.wts.gui;
+package com.erunseelie.tts.gui;
 
-import net.gegy1000.wts.SlotPlaceInfo;
+import com.erunseelie.tts.SlotPlaceInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;

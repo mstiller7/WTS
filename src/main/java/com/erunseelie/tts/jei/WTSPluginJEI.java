@@ -1,4 +1,4 @@
-package net.gegy1000.wts.jei;
+package com.erunseelie.tts.jei;
 
 import mezz.jei.api.BlankModPlugin;
 import mezz.jei.api.IJeiRuntime;

@@ -1,8 +1,8 @@
-package net.gegy1000.wts.gui.provider;
+package com.erunseelie.tts.gui.provider;
 
+import com.erunseelie.tts.gui.JEISlotGUI;
+import com.erunseelie.tts.gui.SlotGUI;
 import mezz.jei.api.IJeiRuntime;
-import net.gegy1000.wts.gui.JEISlotGUI;
-import net.gegy1000.wts.gui.SlotGUI;
 import net.minecraftforge.fml.common.Loader;
 
 public class JEIGuiProvider implements SlotGuiProvider {

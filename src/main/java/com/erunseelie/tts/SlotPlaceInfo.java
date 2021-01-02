@@ -1,6 +1,6 @@
-package net.gegy1000.wts;
+package com.erunseelie.tts;
 
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 import java.util.LinkedHashSet;
@@ -20,7 +20,7 @@ public class SlotPlaceInfo {
     }
 
     public static SlotPlaceInfo create(Slot slot) {
-        return new SlotPlaceInfo(slot, WhatsThatSlot.ITEMS.stream().filter(slot::isItemValid).collect(Collectors.toList()));
+        return new SlotPlaceInfo(slot, ThatsThatSlot.ITEMS.stream().filter(slot::isItemValid).collect(Collectors.toList()));
     }
 
     public Slot getSlot() {

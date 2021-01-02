@@ -1,7 +1,7 @@
-package net.gegy1000.wts.gui;
+package com.erunseelie.tts.gui;
 
-import net.gegy1000.wts.SlotPlaceInfo;
-import net.gegy1000.wts.WhatsThatSlot;
+import com.erunseelie.tts.SlotPlaceInfo;
+import com.erunseelie.tts.util.Keyboard;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,7 +15,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 public class VanillaSlotGUI extends SlotGUI {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(WhatsThatSlot.MODID, "textures/gui/gui.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Keyboard.MODID, "textures/gui/gui.png");
 
     private SlotPlaceInfo placeInfo;
     private int scroll;
