@@ -5,6 +5,8 @@ import com.erunseelie.tts.gui.SlotGUI;
 import com.erunseelie.tts.gui.provider.SlotGuiProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.util.InputMappings;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.AirItem;
 import net.minecraft.item.Item;
@@ -13,6 +15,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,17 +35,23 @@ public class Event {
         return items;
     }
 
+    public static void keyPress() {
+        long handle = Minecraft.getInstance().getMainWindow().getHandle();
+    }
+
     @SubscribeEvent
     public void onGUIChange(GuiOpenEvent event) {
-        if (!(event.getGui() instanceof GuiContainer)) {
+        if (!(event.getGui() instanceof ContainerScreen)) {
             this.hide();
         }
     }
 
     @SubscribeEvent
-    public void onKeyPress(GuiScreenEvent.KeyboardInputEvent event) {
+    public void onKeyPress(GuiScreenEvent.KeyboardKeyPressedEvent.Pre event) {
         Screen currentScreen = Minecraft.getInstance().currentScreen;
-        if (Keyboard.isKeyDown(KEY_CHECK_SLOT.getKeyCode()) && currentScreen instanceof GuiContainer) {
+        InputMappings.Input key = InputMappings.getInputByCode(event.getKeyCode(), event.getScanCode());
+//        TODO
+        if (key == Keyboard.checkSlot && currentScreen instanceof ContainerScreen) {
             GuiContainer container = (GuiContainer) currentScreen;
             Slot selectedSlot = container.getSlotUnderMouse();
             if (selectedSlot != null) {
