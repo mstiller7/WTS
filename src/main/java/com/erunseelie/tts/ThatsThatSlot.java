@@ -18,37 +18,36 @@ import java.util.List;
 
 @Mod(ThatsThatSlot.MODID)
 public class ThatsThatSlot {
-
-    public static final String MODID = "thatsthatslot";
-    public static Logger log = LogManager.getLogger(MODID);
-
-    public static List<ItemStack> ITEMS = new LinkedList<>();
-
-    public ThatsThatSlot() {
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        bus.addListener(this::preInit);
-        bus.addListener(this::preInitClient);
-        MinecraftForge.EVENT_BUS.register(this);
-    }
-
-
-    /**
-     * Common event processing.
-     *
-     * @param event
-     */
-    private void preInit(final FMLCommonSetupEvent event) {
-//        TODO network stuff.
-    }
-
-    /**
-     * Client-specific event processing.
-     *
-     * @param event
-     */
-    private void preInitClient(final FMLClientSetupEvent event) {
-        ClientRegistry.registerKeyBinding(Keyboard.checkSlot);
-        ITEMS = Event.populateItems();
-    }
-
+	
+	public static final String MODID = "thatsthatslot";
+	public static Logger log = LogManager.getLogger(MODID);
+	
+	public static List<ItemStack> ITEMS = new LinkedList<>();
+	
+	public ThatsThatSlot() {
+		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+		bus.addListener(this::preInit);
+		bus.addListener(this::preInitClient);
+		MinecraftForge.EVENT_BUS.register(this);
+	}
+	
+	/**
+	 * Common event processing.
+	 *
+	 * @param event
+	 */
+	private void preInit(final FMLCommonSetupEvent event) {
+		// TODO network stuff.
+	}
+	
+	/**
+	 * Client-specific event processing.
+	 *
+	 * @param event
+	 */
+	private void preInitClient(final FMLClientSetupEvent event) {
+		ClientRegistry.registerKeyBinding(Keyboard.checkSlot);
+		ITEMS = Event.populateItems();
+	}
+	
 }
